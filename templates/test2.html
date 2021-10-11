@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
+</script>
+<head>
+    <title>js调用摄像头拍照上传图片</title>
+    <meta charset="utf-8">
+</head>
+<body>
+<style>
+    #videoGroup
+    {
+        position:absolute;
+        left:100px;
+        top:100px
+    }
+    #buttonGroup
+    {
+        position:absolute;
+        left:580px;
+        top:700px
+    }
+    #buttonGroup2
+    {
+        position:absolute;
+        left:580px;
+        top:770px
+    }
+    .btn
+    {
+        background: #aaa;
+        padding: 5px;
+        color: #fff;
+        width:120px;
+        height:50px
+    }
+</style>
+<div>
+<div id = "videoGroup">
+    <video id="video" width="600px" height="450px" autoplay="autoplay"></video>
+    <canvas id="canvas" width="600px" height="450px"></canvas>
+</div>
+<div id = "buttonGroup">
+    <button class="btn" onclick="openMedia()">开启摄像头</button>&nbsp&nbsp&nbsp&nbsp
+    <button class="btn" onclick="closeMedia()">关闭摄像头</button>
+</div>
+
+<div id = "buttonGroup2">
+    <button class="btn" onclick="startDetect()">开始检测</button>&nbsp&nbsp&nbsp&nbsp
+    <button class="btn" onclick="stopDetect()">停止检测</button>
+</div>
+</div>
+<script>
+    let mediaStreamTrack=null; // 视频对象(全局)
+    let video ;
+    function openMedia() {
+        let constraints = {
+            video: { width: 600, height: 450 },
+            audio: false
+        };
+        //获得video摄像头
+         video = document.getElementById('video');     
+        let promise = navigator.mediaDevices.getUserMedia(constraints);
+        promise.then((mediaStream) => {
+           // mediaStreamTrack = typeof mediaStream.stop === 'function' ? mediaStream : mediaStream.getTracks()[1];
+           mediaStreamTrack=mediaStream.getVideoTracks()
+            video.srcObject = mediaStream;
+            video.play();
+        });
+    }
+
+    // 拍照
+    function takePhoto() {
+        //获得Canvas对象
+        let video = document.getElementById('video');
+        let canvas = document.getElementById('canvas');
+        let ctx = canvas.getContext('2d');
+        ctx.drawImage(video, 0, 0, 600, 450);
+        // toDataURL  ---  可传入'image/png'---默认, 'image/jpeg'
+        let img = document.getElementById('canvas').toDataURL("image/jpeg");
+        // 这里的img就是得到的图片
+        //console.log('img-----', img);
+　　
+        var bounding_box;
+　　　　　　$.ajax({　　　　　　　
+            url:"/detect",
+            type:"POST",
+            data:{ imageBase64: img},
+            success:function(data){
+                //console.log(data);
+                var data = JSON.parse(data);
+                //process bounding box
+                if (data.bounding_box != null) {
+                    $.each( data.bounding_box,function(index,box){
+                        var x = parseInt(box[0])
+                        var y = parseInt(box[1])
+                        var width = parseInt(box[2]) - parseInt(box[0])
+                        var height = parseInt(box[3]) - parseInt(box[1])
+                        ctx.lineWidth="4";
+                        ctx.strokeStyle="red";
+                        ctx.strokeRect(x,y,width,height)　
+
+                        ctx.fillStyle = "#f58220";
+                        // 设置水平对齐方式
+                        ctx.textAlign = "center";
+                        // 设置垂直对齐方式
+                        ctx.font="20px Georgia";
+                        ctx.textBaseline = "left";
+                        var str1 = "man score: " + data.face_property[index][0]
+                        var str2 = "open mouth score: " + data.face_property[index][1]
+                        ctx.fillText(str1, x, y-40);
+                        ctx.fillText(str2, x, y-20);
+
+                        var str3 = "name: " + data.name_list[index]
+                        ctx.fillText(str3, x, y-60);
+
+                    });
+                }
+                //process face key point
+                if (data.key_point != null) {
+                    $.each(data.key_point,function(index,points){
+                        for (var i=0;i<68;i++)
+                        {
+                            ctx.beginPath();
+                            ctx.arc(points[i*2]*600,points[i*2+1]*450,4,0,360,false);
+                            ctx.fillStyle="#7fb80e";//填充颜色,默认是黑色
+                            ctx.fill();//画实心圆
+                            ctx.closePath();
+                        }
+
+                    });
+                }　
+
+            },
+            error:function(){        		　　　　　　　　
+                console.log("服务端异常！");        	　　　　　　
+                }        　　　　　　
+            });
+            //console.log(window.bounding_box)
+
+
+    }
+
+    // 关闭摄像头
+    function closeMedia() {
+          let stream = document.getElementById('video').srcObject;
+          let tracks = stream.getTracks();
+
+          tracks.forEach(function(track) {
+            track.stop();
+          });
+
+         document.getElementById('video').srcObject = null;
+    }
+    var myDetectTimer;
+    function startDetect(){
+        myDetectTimer = window.setInterval("takePhoto()",1000);
+    }
+
+    function stopDetect(){
+        window.clearInterval(myDetectTimer);
+    }
+
+
+</script>
+</body>
