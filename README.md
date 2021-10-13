@@ -1,3 +1,5 @@
+[![Python](https://img.shields.io/static/v1?label=python&message=3.8.12&color=blue)](https://www.python.org/)
+
 # face project
 
 # 1.introduction with the whole project
