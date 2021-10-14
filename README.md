@@ -1,7 +1,5 @@
-
 # face project
 
----
 [![Python](https://img.shields.io/static/v1?label=build&message=passing&color=green)](https://www.python.org/)
 [![Python](https://img.shields.io/static/v1?label=python&message=3.8.12&color=blue)](https://www.python.org/)
 [![torch](https://img.shields.io/static/v1?label=torch&message=1.8.1&color=blue)](https://pytorch.org/)
