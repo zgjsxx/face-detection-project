@@ -20,6 +20,8 @@ This part can detect 68 key points  of the face area. The face key point distrub
 We use the [300W-LP](http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3ddfa/main.htm) database to train the model.
 The train code can be found on my another github repo.
 
+The related training code can be founded here: [face key point detection](https://github.com/zgjsxx/face-key-point-pytorch)
+
 # 1.3. face property recognize
 For this part,we use the model to recognize the property of the face. In this project, we use model to recognize
 the man or woman and open mouth or not open mouth.
