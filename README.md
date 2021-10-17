@@ -5,7 +5,7 @@
 [![torch](https://img.shields.io/static/v1?label=torch&message=1.8.1&color=blue)](https://pytorch.org/)
 
 # 1.introduction with the whole project
-This project is a pytorch implementation of face detection, face recognition ,face key point detection 
+This project is a pytorch implementation of face detection, face recognition ,face key point detection
 and face property detection. The project includes the a simple UI and a flask-based backend system.
 
 # 1.1 face detection and recognize
@@ -31,14 +31,12 @@ We train the model with [celeba1](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.ht
 
 The related training code can be found here: [face propterty detection](https://github.com/zgjsxx/face-property-detection-pytorch)
 
-
-
 # 2. how to run
-First, you need to install the third-party packages
+**First**, you need to install the third-party packages
 ```
 pip install -r requirements.txt
 ```
-Second, you need to download the face-key-point model and face property model
+**Second**, you need to download the face-key-point model and face property model
 
 |  model       | link     |
 |  ----  | ----  |
@@ -46,13 +44,30 @@ Second, you need to download the face-key-point model and face property model
 | face-property-resnet-50-state.ptn  | https://pan.baidu.com/s/1AUzXZBuJ-ZAnGD0a_BZHgg code: 8usq |
 
 then simply run the below command
+**Third**, you need to generate the face label.
+You need to put your pictures on the folder face_recognition_raw_pic/origin, the folder structure is as belows:
+```
+|--face_recognition_raw_pic
+|----origin
+|------mahuateng
+|------mayun
+|------others
+```
+After putting the picture, you can run the below command to create database:
+```
+python3 create_database.py
+```
+
+After executing the above steps successfully, you can run the main srcipt:
+
 ```
 python3 main.py
 ```
 
-input http://127.0.0.1/home
-and then you can get the below result:
+input http://127.0.0.1/home on the browser
+click open camera and start detection, and then you can get the below result:
 ![img.png](document/pic/img2.png)
+
 
 
 
