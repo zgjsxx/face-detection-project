@@ -19,7 +19,7 @@ def index():
 
 @app.route('/home')
 def home():
-    return render_template('test2.html')
+    return render_template('face.html')
 
 @app.route('/detect',methods=['POST'])
 def detect():

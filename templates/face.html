@@ -41,13 +41,13 @@
     <canvas id="canvas" width="600px" height="450px"></canvas>
 </div>
 <div id = "buttonGroup">
-    <button class="btn" onclick="openMedia()">开启摄像头</button>&nbsp&nbsp&nbsp&nbsp
-    <button class="btn" onclick="closeMedia()">关闭摄像头</button>
+    <button class="btn" onclick="openMedia()">open camera</button>&nbsp&nbsp&nbsp&nbsp
+    <button class="btn" onclick="closeMedia()">close camera</button>
 </div>
 
 <div id = "buttonGroup2">
-    <button class="btn" onclick="startDetect()">开始检测</button>&nbsp&nbsp&nbsp&nbsp
-    <button class="btn" onclick="stopDetect()">停止检测</button>
+    <button class="btn" onclick="startDetect()">start detection</button>&nbsp&nbsp&nbsp&nbsp
+    <button class="btn" onclick="stopDetect()">stop detection</button>
 </div>
 </div>
 <script>
@@ -138,7 +138,6 @@
             });
             //console.log(window.bounding_box)
 
-
     }
 
     // 关闭摄像头
@@ -154,7 +153,7 @@
     }
     var myDetectTimer;
     function startDetect(){
-        myDetectTimer = window.setInterval("takePhoto()",1000);
+        myDetectTimer = window.setInterval("takePhoto()",3000);
     }
 
     function stopDetect(){

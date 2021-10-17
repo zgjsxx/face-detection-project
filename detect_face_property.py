@@ -13,7 +13,7 @@ import cv2
 labels = ['Male','Mouth_Slightly_Open']
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-model_path = r'pretrained_models/face_property/model-resnet-50-state.ptn'
+model_path = r'pretrained_models/face_property/face-property-resnet-50-state.ptn'
 model = ResNet50(class_num=2)
 model.to(device)
 checkpoint = torch.load(model_path)

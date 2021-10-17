@@ -38,6 +38,13 @@ First, you need to install the third-party packages
 ```
 pip install -r requirements.txt
 ```
+Second, you need to download the face-key-point model and face property model
+
+|  model       | link     |
+|  ----  | ----  |
+| face-keypoint-vgg16-0.pth  | https://pan.baidu.com/s/1c9vnZbrgQllNJXZ2alqyBQ code：dfhr |
+| face-property-resnet-50-state.ptn  | https://pan.baidu.com/s/1AUzXZBuJ-ZAnGD0a_BZHgg code:8usq |
+
 then simply run the below command
 ```
 python3 main.py

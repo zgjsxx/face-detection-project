@@ -12,7 +12,7 @@ print(device)
 model_name = "vgg16"
 net = vgg(model_name=model_name, num_classes=136, init_weights=True)
 net.to(device)
-model_dir= r"pretrained_models/face_key_point/vgg16-face-keypoint-0.pth"
+model_dir= r"pretrained_models/face_key_point/face-keypoint-vgg16-0.pth"
 checkpoint = torch.load(model_dir)
 net.load_state_dict(checkpoint)
 
