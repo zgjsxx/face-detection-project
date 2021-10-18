@@ -58,7 +58,7 @@ def detect_face_property(img):
     width = img.size[0]
     height = img.size[1]
     boxes,name_list = detect_face_position(img)
-    print(boxes.shape)
+    #print(boxes.shape)
     if type(boxes) is not numpy.ndarray:
         return None,None
     face_property = []

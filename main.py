@@ -41,34 +41,6 @@ def detect():
     file.close()
 
     img = Image.open('0.png')  # 获取图片
-
-    # cv2.namedWindow("Image")  # 创建窗口
-    # pimg = cv2.cvtColor(np.asarray(pimg), cv2.COLOR_RGB2BGR)
-    # cv2.imshow("Image", pimg)  # 显示图片
-    #
-    # cv2.waitKey(0)
-    #
-    # cv2.destroyAllWindows()
-    # print(image_data)
-    # img = Image.open(BytesIO(image_data))
-    # print(img)
-    # print(img.size)
-    # img.show()
-    # img = cv2.cvtColor(np.asarray(img), cv2.COLOR_RGB2BGR)
-    # cv2.imshow(img)
-    # cv2.waitKeys(0)
-    # image_b64 = request.values['imageBase64']
-    # image_data = re.sub('^data:image/.+;base64,', '', image_b64).decode('base64')
-    # image_PIL = Image.open(cStringIO.StringIO(image_b64))
-    # image_np = np.array(image_PIL)
-    # print ('Image received: {}'.format(image_np.shape))
-    # cv2.destroyAllWindows()
-    # fd = request.files.get('file')
-    # print(fd)
-    # jpg_bin = fd.read()
-    # img = cv2.imdecode(np.asarray(bytearray(image_data),dtype='uint8'), cv2.IMREAD_COLOR)
-    #
-    # img = Image.fromarray(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
     img_raw = img.copy()
     width = img_raw.size[0]
     height = img_raw.size[1]
